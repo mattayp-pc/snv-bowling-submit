@@ -1,0 +1,2196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SNV HS Bowling: Match Submission</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+    </style>
+    <base target="_top">
+    <style>
+      *{
+        box-sizing: border-box;
+      }
+      h2 {
+        margin: 0px;
+      }
+      h1 {
+        margin: 10px;
+      }
+      body {
+        min-width: 1200px;
+        font-family: "Oswald",monospace;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #d9d9d9;
+        margin: 0;
+        text-align: center; /* Aligns text inside elements */
+      }
+      #divisionSelect{
+        text-align: center;
+        width: 200px;
+        border: 2px solid black;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      #header-buttons-div {
+        width: 1100px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: "Oswald",monospace;
+        align-items: center;
+      }
+      select {
+        width: 250px;
+        padding: 4px;
+        margin: 0px;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+      }
+      .button-30 {
+        align-items: center;
+        appearance: none;
+        background-color: #FCFCFD;
+        border-radius: 4px;
+        border-width: 0;
+        box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#D6D6E7 0 -3px 0 inset;
+        box-sizing: border-box;
+        color: #36395A;
+        cursor: pointer;
+        display: inline-flex;
+        font-family: "Oswald",monospace;
+        font-weight: bold;
+        height: 48px;
+        width: 160px;
+        justify-content: center;
+        line-height: 1;
+        list-style: none;
+        overflow: hidden;
+        padding-left: 20px;
+        padding-right: 20px;
+        position: relative;
+        text-align: left;
+        text-decoration: none;
+        transition: box-shadow .15s,transform .15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        white-space: nowrap;
+        will-change: box-shadow,transform;
+        font-size: 24px;
+      }
+      .button-30:focus {
+        box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+      }
+      .button-30:hover {
+        box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+        transform: translateY(-2px);
+      }
+      .button-30:active {
+        box-shadow: #D6D6E7 0 3px 7px inset;
+        transform: translateY(2px);
+      }
+      .submit-anyway-button, .go-back-and-fix-button {
+        height: 36px;
+        width: 100px;
+        font-size: 16px;
+        padding-left: 5px;
+        padding-right: 5px;
+        text-align: center;
+      }
+      body {
+          font-family: 'Oswald', sans-serif;
+      }
+
+      table.bowling-scores {
+          border-collapse: collapse;
+          width: 1110px;
+          font-size: 20px;
+          margin-bottom: 20px; /* Space between tables */
+      }
+
+      .bowling-scores td {
+          border: 1px solid black;
+          height: 30px;
+          text-align: center;
+          font-weight: bold;
+      }
+
+      .boys-team .header-cell {
+          background-color: #BED7ED;
+      }
+
+      .girls-team .header-cell-girls {
+          background-color: #f8cbad;
+      }
+
+      .data-cell {
+          background-color: #ffffff;
+          text-align: left;
+          padding: 0px;
+      }
+
+      .bowling-scores td:nth-child(5n+1) {
+          width: 215px;
+      }
+
+      .bowling-scores td:not(:nth-child(5n+1)) {
+          width: 85px;
+      }
+      #sheetLinks{
+        font-size: 24px;
+      }
+      .scoreInput {
+        text-align: center;
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+        height: 100%;
+        padding: 0px;
+        border: none;
+      }
+      
+      select, #datePicker {
+        height: 100%; /* Match the table cell height */
+        width: 100%;
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        color: #000000; /* Text color */
+        background-color: #ffffff; /* Same as the data-cell background */
+        border: 0px solid black; /* Same as the table cell border */
+        box-sizing: border-box; /* Ensure padding and border are included in total width and height */
+        padding: 0 2px; /* Adjust padding as needed */
+        text-align: left; /* Match the table cell text alignment */
+      }
+      #datePicker {
+        padding-left: 6px;
+      }
+
+      /* Style for dropdowns inside the table cells */
+      table select {
+        height: 100%; /* Match the table cell height */
+        font-family: 'Oswald', sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        color: #000000; /* Text color */
+        background-color: #ffffff; /* Same as the data-cell background */
+        border: 0px solid black; /* Same as the table cell border */
+        box-sizing: border-box; /* Ensure padding and border are included in total width and height */
+        padding: 0 2px; /* Adjust padding as needed */
+        text-align: left; /* Match the table cell text alignment */
+      }
+      .playerDropdown {
+        padding-top: 0px;
+        padding-bottom: 0px;
+        text-align: right;
+        font-size: 18px;
+        font-weight: 1;
+        font-weight: bold;
+      }
+
+      input[type=number],
+      input[type='number']::-webkit-inner-spin-button, 
+      input[type='number']::-webkit-outer-spin-button { 
+          -webkit-appearance: none;
+          margin: 0;
+          text-align: center;
+      }
+
+      #loadingOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column; 
+      }
+
+      .spinner svg {
+        width: 120px;
+        height: 120px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+      }
+
+      .loadingText {
+          font-family: 'Oswald', sans-serif;
+          font-size: 36px;
+          font-weight: bold;
+          color: white;
+          margin-top: -20px;
+         text-shadow: 
+          1px 1px 0px black, /* Right shadow */
+          -1px 1px 0px black, /* Left shadow */
+          1px -1px 0px black, /* Top shadow */
+          -1px -1px 0px black; /* Bottom shadow */
+      }
+
+      #loadingOverlay {
+        position: fixed;
+        inset: 0;
+        display: none; 
+        justify-content: center;
+        align-items: center;
+        background: rgba(0,0,0,0.3);
+        z-index: 9999;
+      }
+
+      /* Modal overlay */
+      #messageOverlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.4);
+        display: none;          /* shown via JS */
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+      }
+
+      .messageOverlay-content {
+        background: #ffffff;
+        padding: 20px 24px;
+        max-width: 600px;
+        width: 90%;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        font-size: 16px;
+      }
+
+      #messageBody {
+        margin-top: 8px;
+        text-align: center !important;
+      }
+
+      #messageLinks a {
+        display: inline-block;
+        margin-top: 8px;
+      }
+
+      .messageOverlay-buttons {
+        margin-top: 16px;
+        text-align: right;
+      }
+
+      .messageOverlay-buttons button {
+        margin-left: 8px;
+      }
+      #messageBody ul {
+        padding-left: 20px;   /* nicer indentation */
+        margin-left: 0;
+        text-align: left !important;
+      }
+
+      #messageBody p {
+        text-align: left !important;
+      }
+
+
+</style>
+<script>
+  // Calls the Cloudflare relay (functions/api/[action].js), which forwards to
+  // the Apps Script web app (Api.js → doPost). Always resolves to the JSON
+  // object Apps Script returned; rejects only on network/HTTP failure.
+  function callApi(action, data) {
+    return fetch('/api/' + action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data || {})
+    }).then(function (res) {
+      return res.json().catch(function () {
+        throw new Error('Unexpected response (HTTP ' + res.status + ')');
+      });
+    });
+  }
+
+  // Team list comes from Teams.js in Apps Script (via /api/init) — edit teams THERE.
+  var LEAGUES = {};
+  var rosterData = []; // Global variable to store roster data
+  var isLoading = false;
+  document.addEventListener('DOMContentLoaded', function() {
+    callApi('init').then(function(response) {
+        if (!response || !response.success) {
+          throw new Error((response && response.feedback) || 'No data returned');
+        }
+        LEAGUES = response.leagues || {};
+        var data = response.roster;
+        rosterData = data;
+
+        isLoading = true;
+        loadStateFromLocalStorage();  // Load any saved data on page load, using the new function
+        isLoading = false;
+        document.getElementById('divisionSelect').disabled = false;
+
+        // Attach event listeners after roster data is loaded
+        attachEventListeners();  
+
+        // After loading saved data, update totals to reflect any changes
+        updateAllPlayerTotals();
+    }).catch(function(error) {
+        console.error('Failed to load roster data:', error);
+        alert('Error loading roster data. Please try again later.');
+    });
+});
+
+  function showLoadingOverlay(message) {
+    const overlay = document.getElementById('loadingOverlay');
+    const text = overlay.querySelector('.loadingText');
+    if (message) text.textContent = message;
+    overlay.style.display = 'flex';
+  }
+
+  function hideLoadingOverlay() {
+    document.getElementById('loadingOverlay').style.display = 'none';
+  }
+
+  function showMessageOverlay(options) {
+    const {
+      title = '',
+      bodyHtml = '',
+      linksHtml = '',
+      primaryText = 'OK',
+      secondaryText = '',
+      onPrimary = null,
+      onSecondary = null
+    } = options || {};
+
+    const overlay = document.getElementById('messageOverlay');
+    const titleEl = document.getElementById('messageTitle');
+    const bodyEl = document.getElementById('messageBody');
+    const linksEl = document.getElementById('messageLinks');
+    const primaryBtn = document.getElementById('messagePrimaryBtn');
+    const secondaryBtn = document.getElementById('messageSecondaryBtn');
+
+    titleEl.textContent = title;
+    bodyEl.innerHTML = bodyHtml;
+    linksEl.innerHTML = linksHtml;
+
+    primaryBtn.textContent = primaryText || 'OK';
+    secondaryBtn.style.display = secondaryText ? 'inline-block' : 'none';
+    if (secondaryText) secondaryBtn.textContent = secondaryText;
+
+    // reset handlers
+    primaryBtn.onclick = function() {
+      overlay.style.display = 'none';
+      if (typeof onPrimary === 'function') onPrimary();
+    };
+
+    secondaryBtn.onclick = function() {
+      overlay.style.display = 'none';
+      if (typeof onSecondary === 'function') onSecondary();
+    };
+
+    overlay.style.display = 'flex';
+  }
+
+  function hideMessageOverlay() {
+    document.getElementById('messageOverlay').style.display = 'none';
+  }
+
+
+
+  function attachEventListeners() {
+    const playerTypes = ['boys', 'girls'];
+    const teamTypes = ['home', 'away'];
+
+    // Attach event listeners for player score inputs
+    playerTypes.forEach(function(playerType) {
+        teamTypes.forEach(function(teamType) {
+            for (let playerNumber = 1; playerNumber <= 12; playerNumber++) {
+                for (let gameNumber = 1; gameNumber <= 3; gameNumber++) {
+                    const inputId = `${playerType}${teamType.charAt(0).toUpperCase() + teamType.slice(1)}Player${playerNumber}Game${gameNumber}`;
+                    const inputElement = document.getElementById(inputId);
+                    if (inputElement) {
+                        inputElement.addEventListener('input', function() {
+                            if(!isLoading){
+                              validateScoreInput(inputElement);
+                              updatePlayerTotal(playerType, teamType, playerNumber);
+                              saveStateToLocalStorage();  // Save entire state to localStorage
+                            }
+                        });
+
+                        inputElement.addEventListener('keydown', function(event) {
+                            switch (event.key) {
+                                case 'ArrowUp':
+                                    event.preventDefault();
+                                    moveFocus(playerType, teamType, playerNumber, gameNumber, -1, 0);
+                                    break;
+                                case 'ArrowDown':
+                                    event.preventDefault();
+                                    moveFocus(playerType, teamType, playerNumber, gameNumber, 1, 0);
+                                    break;
+                                case 'ArrowLeft':
+                                    event.preventDefault();
+                                    moveFocus(playerType, teamType, playerNumber, gameNumber, 0, -1);
+                                    break;
+                                case 'ArrowRight':
+                                    event.preventDefault();
+                                    moveFocus(playerType, teamType, playerNumber, gameNumber, 0, 1);
+                                    break;
+                            }
+                        });
+                    }
+                }
+            }
+        });
+    });
+
+    // Attach event listeners for dropdown selections (location, team, players)
+    ['divisionSelect', 'homeTeamDropdownSelect', 'awayTeamDropdownSelect', 'locationDropdown', 'datePicker'].forEach(function(dropdownId) {
+        const dropdownElement = document.getElementById(dropdownId);
+        if (dropdownElement) {
+            dropdownElement.addEventListener('change', function() {
+              if(!isLoading){
+                saveStateToLocalStorage();  // Save entire state to localStorage
+              }
+            });
+        }
+    });
+
+    // Attach event listeners for player dropdowns
+    playerTypes.forEach(function(playerType) {
+        teamTypes.forEach(function(teamType) {
+            for (let playerNumber = 1; playerNumber <= 12; playerNumber++) {
+                const dropdownId = `${playerType}${teamType.charAt(0).toUpperCase() + teamType.slice(1)}Player${playerNumber}`;
+                const dropdownElement = document.getElementById(dropdownId);
+                if (dropdownElement) {
+                    dropdownElement.addEventListener('change', function() {
+                      if(!isLoading){
+                        saveStateToLocalStorage();  // Save entire state to localStorage
+                      }
+                    });
+                }
+            }
+        });
+    });
+  }
+
+
+function saveStateToLocalStorage() {
+    try {
+        console.log('Saving state to localStorage...');
+
+        const dropdownIds = ['divisionSelect', 'locationDropdown', 'homeTeamDropdownSelect', 'awayTeamDropdownSelect'];
+
+        const state = {};
+
+        // Save dropdowns (including options and selected value)
+        dropdownIds.forEach(dropdownId => {
+            const dropdownElement = document.getElementById(dropdownId);
+            if (dropdownElement) {
+                // Save the selected value
+                state[dropdownId] = {
+                    selected: dropdownElement.value,
+                    options: Array.from(dropdownElement.options).map(option => ({
+                        value: option.value,
+                        text: option.text,
+                        selected: option.selected
+                    }))
+                };
+            } else {
+                console.warn(`Dropdown with id "${dropdownId}" not found during save.`);
+            }
+        });
+
+        // Save player inputs and dropdowns
+        const playerTypes = ['boys', 'girls'];
+        const teamTypes = ['home', 'away'];
+
+        playerTypes.forEach(playerType => {
+            teamTypes.forEach(teamType => {
+                for (let playerNumber = 1; playerNumber <= 12; playerNumber++) {
+                    for (let gameNumber = 1; gameNumber <= 3; gameNumber++) {
+                        const inputId = `${playerType}${teamType.charAt(0).toUpperCase() + teamType.slice(1)}Player${playerNumber}Game${gameNumber}`;
+                        const inputElement = document.getElementById(inputId);
+                        if (inputElement) {
+                            state[inputId] = inputElement.value;
+                        }
+                    }
+
+                    const dropdownId = `${playerType}${teamType.charAt(0).toUpperCase() + teamType.slice(1)}Player${playerNumber}`;
+                    const dropdownElement = document.getElementById(dropdownId);
+                    if (dropdownElement) {
+                        state[dropdownId] = {
+                            selected: dropdownElement.value,
+                            options: Array.from(dropdownElement.options).map(option => ({
+                                value: option.value,
+                                text: option.text,
+                                selected: option.selected
+                            }))
+                        };
+                    }
+                }
+            });
+        });
+
+        // Store the state object in localStorage
+        localStorage.setItem('bowlingAppState', JSON.stringify(state));
+        console.log('State saved to localStorage.');
+
+        // Save date picker value
+        var datePicker = document.getElementById('datePicker');
+        if (datePicker) {
+            localStorage.setItem('selectedDate', datePicker.value);
+            console.log('Saved date:', datePicker.value); // Outputs '2024-11-01'
+        }
+
+    } catch (error) {
+        console.error('Error saving state to localStorage:', error);
+    }
+}
+
+
+
+function loadStateFromLocalStorage() {
+    try {
+        document.body.style.pointerEvents = 'none'; // Disable all interactions
+        document.getElementById('loadingOverlay').style.display = 'flex'; // Show loading icon
+
+        console.log('Loading saved data from localStorage...');
+
+        // Retrieve the saved state from localStorage
+        var savedState = localStorage.getItem('bowlingAppState');
+
+        // If no saved state is found, stop further processing
+        if (!savedState) {
+            console.warn('No saved state found in localStorage.');
+            document.body.style.pointerEvents = 'auto'; // Re-enable interactions
+            document.getElementById('loadingOverlay').style.display = 'none'; // Hide loading icon
+            return;
+        }
+
+        // Parse the saved state
+        var state = JSON.parse(savedState);
+
+        // Load dropdowns (options and selected values)
+        Object.keys(state).forEach(key => {
+            var elementState = state[key];
+            var element = document.getElementById(key);
+
+            if (element && element.tagName === 'SELECT') {
+                // Load options into the dropdown
+                element.innerHTML = ''; // Clear current options
+                elementState.options.forEach(optionData => {
+                    const option = document.createElement('option');
+                    option.value = optionData.value;
+                    option.textContent = optionData.text;
+                    option.selected = optionData.selected;
+                    element.appendChild(option);
+                });
+
+                // Set the selected value
+                element.value = elementState.selected;
+                element.dispatchEvent(new Event('change')); // Trigger change event if needed
+            }
+        });
+
+        // Load player inputs
+        Object.keys(state).forEach(key => {
+            if (key.includes('Player') && key.includes('Game')) {
+                const inputElement = document.getElementById(key);
+                if (inputElement) {
+                    inputElement.value = state[key];
+                }
+            }
+        });
+
+        var savedDate = localStorage.getItem('selectedDate');
+        if (savedDate) {
+            var datePicker = document.getElementById('datePicker');
+            if (datePicker) {
+                datePicker.value = savedDate;
+                updateDate();
+                console.log('Loaded date:', savedDate); // Sets it to '2024-11-01', which is appropriate for input type="date"
+            }
+        }
+        // Recalculate all player totals after loading data
+        updateAllPlayerTotals();
+        console.log('State loaded from localStorage.');
+        
+    } catch (error) {
+        console.error('Error loading state from localStorage:', error);
+    }
+    document.body.style.pointerEvents = 'auto'; // Re-enable interactions
+    document.getElementById('loadingOverlay').style.display = 'none'; // Hide loading icon
+}
+
+  function clearAllEntries() {
+    const userConfirmed = confirm(
+      "Are you sure you want to clear all entries? This action cannot be undone."
+    );
+    if (!userConfirmed) return;
+
+    try {
+      console.log('Clearing all inputs and localStorage...');
+      isLoading = true;  // prevent saveStateToLocalStorage from running during reset
+
+      // ---- Division & top dropdowns ----
+      const divisionSelect = document.getElementById('divisionSelect');
+      if (divisionSelect) {
+        divisionSelect.selectedIndex = 0;
+        if (divisionSelect.options.length > 0) {
+          divisionSelect.options[0].disabled = true; // "Select Division"
+          divisionSelect.value = '';
+        }
+      }
+
+      const locationDropdown = document.getElementById('locationDropdown');
+      if (locationDropdown) {
+        locationDropdown.selectedIndex = 0;
+      }
+
+      const homeTeamDropdownSelect = document.getElementById('homeTeamDropdownSelect');
+      const awayTeamDropdownSelect = document.getElementById('awayTeamDropdownSelect');
+
+      // Wipe teams so you can't choose them without re-choosing a division
+      if (homeTeamDropdownSelect) {
+        homeTeamDropdownSelect.innerHTML =
+          '<option value="" selected disabled>Select Home Team</option>';
+      }
+      if (awayTeamDropdownSelect) {
+        awayTeamDropdownSelect.innerHTML =
+          '<option value="" selected disabled>Select Away Team</option>';
+      }
+
+      // ---- Clear all player inputs and player dropdowns ----
+      const playerTypes = ['boys', 'girls'];
+      const teamTypes   = ['home', 'away'];
+
+      playerTypes.forEach(playerType => {
+        teamTypes.forEach(teamType => {
+          for (let playerNumber = 1; playerNumber <= 12; playerNumber++) {
+            // scores
+            for (let gameNumber = 1; gameNumber <= 3; gameNumber++) {
+              const inputId = `${playerType}${teamType.charAt(0).toUpperCase() +
+                                teamType.slice(1)}Player${playerNumber}Game${gameNumber}`;
+              const inputElement = document.getElementById(inputId);
+              if (inputElement) inputElement.value = '';
+            }
+            // player name dropdown
+            const dropdownId = `${playerType}${teamType.charAt(0).toUpperCase() +
+                                teamType.slice(1)}Player${playerNumber}`;
+            const dropdownElement = document.getElementById(dropdownId);
+            if (dropdownElement) {
+              dropdownElement.selectedIndex = 0;
+            }
+          }
+        });
+      });
+
+      // ---- Date picker ----
+      const datePicker = document.getElementById('datePicker');
+      if (datePicker) {
+        datePicker.value = '';
+      }
+
+      // Recalc totals
+      updateAllPlayerTotals();
+
+      // Girls header info
+      const girlsDateEl     = document.getElementById("girlsDate");
+      const girlsHomeTeamEl = document.getElementById("girlsHomeTeam");
+      const girlsAwayTeamEl = document.getElementById("girlsAwayTeam");
+      const girlsLocationEl = document.getElementById("girlsLocation");
+
+      if (girlsDateEl)     girlsDateEl.innerText     = "mm/dd/yyyy";
+      if (girlsHomeTeamEl) girlsHomeTeamEl.innerText = "Home Team";
+      if (girlsAwayTeamEl) girlsAwayTeamEl.innerText = "Away Team";
+      if (girlsLocationEl) girlsLocationEl.innerText = "Location";
+
+      // Links area (if present)
+      const sheetLinksEl = document.getElementById("sheetLinks");
+      if (sheetLinksEl) {
+        sheetLinksEl.innerHTML = "";
+        sheetLinksEl.style.display = "none";
+      }
+
+      // Clear any error/success message
+      const errorMessageElement = document.getElementById('error-message');
+      if (errorMessageElement) {
+        errorMessageElement.style.display = 'none';
+        errorMessageElement.innerHTML = '';
+      }
+
+      // ---- Finally, nuke localStorage state so reload starts clean ----
+      localStorage.removeItem('bowlingAppState');
+      localStorage.removeItem('selectedDate');
+
+      console.log('All inputs and localStorage cleared successfully.');
+    } catch (error) {
+      console.error('Error clearing all entries:', error);
+    } finally {
+      isLoading = false;
+    }
+  }
+
+
+  function clearEntriesAfterSuccessfulSubmission() {
+    try {
+      console.log('Clearing all inputs and localStorage after submission...');
+      isLoading = true;
+
+      const divisionSelect = document.getElementById('divisionSelect');
+      if (divisionSelect) {
+        divisionSelect.selectedIndex = 0;
+        if (divisionSelect.options.length > 0) {
+          divisionSelect.options[0].disabled = true;
+          divisionSelect.value = '';
+        }
+      }
+
+      const locationDropdown = document.getElementById('locationDropdown');
+      if (locationDropdown) {
+        locationDropdown.selectedIndex = 0;
+      }
+
+      const homeTeamDropdownSelect = document.getElementById('homeTeamDropdownSelect');
+      const awayTeamDropdownSelect = document.getElementById('awayTeamDropdownSelect');
+
+      if (homeTeamDropdownSelect) {
+        homeTeamDropdownSelect.innerHTML =
+          '<option value="" selected disabled>Select Home Team</option>';
+      }
+      if (awayTeamDropdownSelect) {
+        awayTeamDropdownSelect.innerHTML =
+          '<option value="" selected disabled>Select Away Team</option>';
+      }
+
+      const playerTypes = ['boys', 'girls'];
+      const teamTypes   = ['home', 'away'];
+
+      playerTypes.forEach(playerType => {
+        teamTypes.forEach(teamType => {
+          for (let playerNumber = 1; playerNumber <= 12; playerNumber++) {
+            for (let gameNumber = 1; gameNumber <= 3; gameNumber++) {
+              const inputId = `${playerType}${teamType.charAt(0).toUpperCase() +
+                                teamType.slice(1)}Player${playerNumber}Game${gameNumber}`;
+              const inputElement = document.getElementById(inputId);
+              if (inputElement) inputElement.value = '';
+            }
+            const dropdownId = `${playerType}${teamType.charAt(0).toUpperCase() +
+                                teamType.slice(1)}Player${playerNumber}`;
+            const dropdownElement = document.getElementById(dropdownId);
+            if (dropdownElement) {
+              dropdownElement.selectedIndex = 0;
+            }
+          }
+        });
+      });
+
+      const datePicker = document.getElementById('datePicker');
+      if (datePicker) {
+        datePicker.value = '';
+      }
+
+      updateAllPlayerTotals();
+
+      const girlsDateEl     = document.getElementById("girlsDate");
+      const girlsHomeTeamEl = document.getElementById("girlsHomeTeam");
+      const girlsAwayTeamEl = document.getElementById("girlsAwayTeam");
+      const girlsLocationEl = document.getElementById("girlsLocation");
+
+      if (girlsDateEl)     girlsDateEl.innerText     = "mm/dd/yyyy";
+      if (girlsHomeTeamEl) girlsHomeTeamEl.innerText = "Home Team";
+      if (girlsAwayTeamEl) girlsAwayTeamEl.innerText = "Away Team";
+      if (girlsLocationEl) girlsLocationEl.innerText = "Location";
+
+      const sheetLinksEl = document.getElementById("sheetLinks");
+      if (sheetLinksEl) {
+        sheetLinksEl.innerHTML = "";
+        sheetLinksEl.style.display = "none";
+      }
+
+      localStorage.removeItem('bowlingAppState');
+      localStorage.removeItem('selectedDate');
+
+      console.log('All inputs and localStorage cleared successfully.');
+    } catch (error) {
+      console.error('Error clearing all entries:', error);
+    } finally {
+      isLoading = false;
+    }
+  }
+
+
+
+// function clearAllEntries() {
+//     // Ask for confirmation before proceeding
+//     const userConfirmed = confirm("Are you sure you want to clear all entries? This action cannot be undone.");
+//     if (!userConfirmed) {
+//         // If the user cancels, stop the function
+//         return;
+//     }
+
+//     try {
+//         console.log('Clearing all inputs and localStorage...');
+
+//         // Clear all dropdowns
+//         const dropdownIds = ['divisionSelect', 'locationDropdown', 'homeTeamDropdownSelect', 'awayTeamDropdownSelect'];
+//         dropdownIds.forEach(dropdownId => {
+//             const dropdownElement = document.getElementById(dropdownId);
+//             if (dropdownElement) {
+//                 dropdownElement.selectedIndex = 0; // Set to default (first) option
+//             }
+//         });
+
+//         // Clear all player inputs and dropdowns
+//         const playerTypes = ['boys', 'girls'];
+//         const teamTypes = ['home', 'away'];
+
+//         playerTypes.forEach(playerType => {
+//             teamTypes.forEach(teamType => {
+//                 for (let playerNumber = 1; playerNumber <= 12; playerNumber++) {
+//                     // Clear input fields for each game
+//                     for (let gameNumber = 1; gameNumber <= 3; gameNumber++) {
+//                         const inputId = `${playerType}${teamType.charAt(0).toUpperCase() + teamType.slice(1)}Player${playerNumber}Game${gameNumber}`;
+//                         const inputElement = document.getElementById(inputId);
+//                         if (inputElement) {
+//                             inputElement.value = ''; // Clear the input field
+//                         }
+//                     }
+//                     // Clear dropdowns for players
+//                     const dropdownId = `${playerType}${teamType.charAt(0).toUpperCase() + teamType.slice(1)}Player${playerNumber}`;
+//                     const dropdownElement = document.getElementById(dropdownId);
+//                     if (dropdownElement) {
+//                         dropdownElement.selectedIndex = 0; // Set to default (first) option
+//                     }
+//                 }
+//             });
+//         });
+
+//         // Clear date picker value
+//         var datePicker = document.getElementById('datePicker');
+//         if (datePicker) {
+//             datePicker.value = ''; // Clear date picker
+//         }
+        
+//         updateAllPlayerTotals();
+//         homeTeamSelection();
+//         awayTeamSelection();
+
+//         document.getElementById("girlsDate").innerText = "mm/dd/yyyy";
+//         document.getElementById("girlsHomeTeam").innerText = "Home Team";
+//         document.getElementById("girlsAwayTeam").innerText = "Away Team";
+//         document.getElementById("girlsLocation").innerText = "Location";
+//         document.getElementById("sheetLinks").innerHTML = "";
+//         document.getElementById("sheetLinks").style.display = "none";
+
+//         // Clear localStorage data related to this app
+//         localStorage.removeItem('bowlingAppState');
+//         localStorage.removeItem('selectedDate');
+
+//         // Clear any error or success message
+//         const linkElement = document.getElementById('sheetLinks');
+//         linkElement.style.display = 'none';
+//         linkElement.innerHTML = '';
+//         const errorMessageElement = document.getElementById('error-message');
+//         errorMessageElement.style.display = 'none';
+//         errorMessageElement.innerHTML = '';
+
+//         console.log('All inputs and localStorage cleared successfully.');
+//     } catch (error) {
+//         console.error('Error clearing all entries:', error);
+//     }
+// }
+
+// function clearEntriesAfterSuccessfulSubmission() {
+//     try {
+//         console.log('Clearing all inputs and localStorage...');
+
+//         // Clear all dropdowns
+//         const dropdownIds = ['divisionSelect', 'locationDropdown', 'homeTeamDropdownSelect', 'awayTeamDropdownSelect'];
+//         dropdownIds.forEach(dropdownId => {
+//             const dropdownElement = document.getElementById(dropdownId);
+//             if (dropdownElement) {
+//                 dropdownElement.selectedIndex = 0; // Set to default (first) option
+//             }
+//         });
+
+//         // Clear all player inputs and dropdowns
+//         const playerTypes = ['boys', 'girls'];
+//         const teamTypes = ['home', 'away'];
+
+//         playerTypes.forEach(playerType => {
+//             teamTypes.forEach(teamType => {
+//                 for (let playerNumber = 1; playerNumber <= 12; playerNumber++) {
+//                     // Clear input fields for each game
+//                     for (let gameNumber = 1; gameNumber <= 3; gameNumber++) {
+//                         const inputId = `${playerType}${teamType.charAt(0).toUpperCase() + teamType.slice(1)}Player${playerNumber}Game${gameNumber}`;
+//                         const inputElement = document.getElementById(inputId);
+//                         if (inputElement) {
+//                             inputElement.value = ''; // Clear the input field
+//                         }
+//                     }
+//                     // Clear dropdowns for players
+//                     const dropdownId = `${playerType}${teamType.charAt(0).toUpperCase() + teamType.slice(1)}Player${playerNumber}`;
+//                     const dropdownElement = document.getElementById(dropdownId);
+//                     if (dropdownElement) {
+//                         dropdownElement.selectedIndex = 0; // Set to default (first) option
+//                     }
+//                 }
+//             });
+//         });
+
+//         // Clear date picker value
+//         var datePicker = document.getElementById('datePicker');
+//         if (datePicker) {
+//             datePicker.value = ''; // Clear date picker
+//         }
+        
+//         updateAllPlayerTotals();
+//         homeTeamSelection();
+//         awayTeamSelection();
+
+//         document.getElementById("girlsDate").innerText = "mm/dd/yyyy";
+//         document.getElementById("girlsHomeTeam").innerText = "Home Team";
+//         document.getElementById("girlsAwayTeam").innerText = "Away Team";
+//         document.getElementById("girlsLocation").innerText = "Location";
+
+//         // Clear localStorage data related to this app
+//         localStorage.removeItem('bowlingAppState');
+//         localStorage.removeItem('selectedDate');
+
+//         console.log('All inputs and localStorage cleared successfully.');
+//     } catch (error) {
+//         console.error('Error clearing all entries:', error);
+//     }
+// }
+
+
+function updateAllPlayerTotals() {
+    var playerTypes = ['boys', 'girls'];
+    var teamTypes = ['home', 'away'];
+
+    // Update player totals for all players
+    playerTypes.forEach(function(playerType) {
+        teamTypes.forEach(function(teamType) {
+            for (var playerNumber = 1; playerNumber <= 12; playerNumber++) {
+                updatePlayerTotal(playerType, teamType, playerNumber);
+            }
+        });
+    });
+}
+
+function moveFocus(playerType, teamType, playerNumber, gameNumber, playerDirection, gameDirection) {
+    // Calculate the next player or game number to focus based on direction
+    var nextPlayerNumber = playerNumber + playerDirection;
+    var nextGameNumber = gameNumber + gameDirection;
+
+    // Handle boundaries for player and game numbers
+    if (nextGameNumber < 1) {
+        nextGameNumber = 3;
+        nextPlayerNumber--;
+    } else if (nextGameNumber > 3) {
+        nextGameNumber = 1;
+        nextPlayerNumber++;
+    }
+
+    // Make sure the player number stays within bounds
+    if (nextPlayerNumber >= 1 && nextPlayerNumber <= 12) {
+        var nextInputId = playerType + teamType.charAt(0).toUpperCase() + teamType.slice(1) + 'Player' + nextPlayerNumber + 'Game' + nextGameNumber;
+        var nextInputElement = document.getElementById(nextInputId);
+        if (nextInputElement) {
+            nextInputElement.focus();
+        }
+    }
+}
+
+
+  function validateScoreInput(inputElement) {
+    var value = inputElement.value;
+    if (value !== '') {
+      var intValue = parseInt(value, 10);
+      if (isNaN(intValue) || intValue < 0) {
+        inputElement.value = 0;
+      } else if (intValue > 300) {
+        inputElement.value = 300;
+      }
+    }
+  }
+
+  function updatePlayerTotal(playerType, teamType, playerNumber) {
+    var total = 0;
+    for (var gameNumber = 1; gameNumber <= 3; gameNumber++) {
+        var inputId = playerType + teamType.charAt(0).toUpperCase() + teamType.slice(1) + 'Player' + playerNumber + 'Game' + gameNumber;
+        var inputElement = document.getElementById(inputId);
+        var value = parseInt(inputElement.value, 10) || 0;
+        total += value;
+    }
+
+    var totalId = playerType + teamType.charAt(0).toUpperCase() + teamType.slice(1) + 'Player' + playerNumber + 'Total';
+    var totalElement = document.getElementById(totalId);
+    if (totalElement) {
+        totalElement.innerText = total;
+    }
+
+    // Update game and overall totals after updating player total
+    updateGameAndOverallTotals(playerType, teamType);
+}
+
+function updateGameAndOverallTotals() {
+    var playerTypes = ['boys', 'girls'];
+    var teamTypes = ['Home', 'Away'];
+
+    playerTypes.forEach(function(playerType) {
+        teamTypes.forEach(function(teamType) {
+            var gameTotals = [0, 0, 0];
+            var overallTotal = 0;
+
+            // Loop through each player to sum the scores for each game
+            for (var playerNumber = 1; playerNumber <= 12; playerNumber++) {
+                for (var gameNumber = 1; gameNumber <= 3; gameNumber++) {
+                    var inputId = playerType + teamType + 'Player' + playerNumber + 'Game' + gameNumber;
+                    var inputElement = document.getElementById(inputId);
+                    var value = parseInt(inputElement.value, 10) || 0;
+                    gameTotals[gameNumber - 1] += value;
+                }
+
+                // Add the player total to the overall total
+                var playerTotalId = playerType + teamType + 'Player' + playerNumber + 'Total';
+                var playerTotalElement = document.getElementById(playerTotalId);
+                if (playerTotalElement) {
+                    var playerTotalValue = parseInt(playerTotalElement.innerText, 10) || 0;
+                    overallTotal += playerTotalValue;
+                }
+            }
+
+            // Update the totals for each game and the overall total
+            for (var gameNumber = 1; gameNumber <= 3; gameNumber++) {
+                var gameTotalId = playerType + teamType + 'Game' + gameNumber + 'Totals';
+                var gameTotalElement = document.getElementById(gameTotalId);
+                if (gameTotalElement) {
+                    gameTotalElement.innerText = gameTotals[gameNumber - 1];
+                }
+            }
+
+            var overallTotalId = playerType + teamType + 'GameTotalTotals';
+            var overallTotalElement = document.getElementById(overallTotalId);
+            if (overallTotalElement) {
+                overallTotalElement.innerText = overallTotal;
+            }
+        });
+    });
+
+    // Update points won and lost after updating game and overall totals
+    updatePointsWonAndLost();
+}
+
+function updatePointsWonAndLost() {
+    var playerTypes = ['boys', 'girls'];
+
+    playerTypes.forEach(function(playerType) {
+        var homeGameTotals = [];
+        var awayGameTotals = [];
+        var homeOverallTotal = 0;
+        var awayOverallTotal = 0;
+
+        // Collect game totals and overall totals for both teams
+        for (var gameNumber = 1; gameNumber <= 3; gameNumber++) {
+            homeGameTotals.push(parseInt(document.getElementById(playerType + 'HomeGame' + gameNumber + 'Totals').innerText, 10) || 0);
+            awayGameTotals.push(parseInt(document.getElementById(playerType + 'AwayGame' + gameNumber + 'Totals').innerText, 10) || 0);
+        }
+
+        homeOverallTotal = parseInt(document.getElementById(playerType + 'HomeGameTotalTotals').innerText, 10) || 0;
+        awayOverallTotal = parseInt(document.getElementById(playerType + 'AwayGameTotalTotals').innerText, 10) || 0;
+
+        var homePointsWon = 0;
+        var awayPointsWon = 0;
+
+        // Variables to store points for each game
+        var homeGamePoints = [0, 0, 0];
+        var awayGamePoints = [0, 0, 0];
+
+        // Calculate points for each game
+        for (var gameNumber = 0; gameNumber < 3; gameNumber++) {
+            if (homeGameTotals[gameNumber] > awayGameTotals[gameNumber] && (homeGameTotals[gameNumber] > 0 || awayGameTotals[gameNumber] > 0)) {
+                homeGamePoints[gameNumber] = 2;
+                homePointsWon += 2;
+            } else if (homeGameTotals[gameNumber] < awayGameTotals[gameNumber] && (homeGameTotals[gameNumber] > 0 || awayGameTotals[gameNumber] > 0)) {
+                awayGamePoints[gameNumber] = 2;
+                awayPointsWon += 2;
+            } else if (homeGameTotals[gameNumber] === awayGameTotals[gameNumber] && (homeGameTotals[gameNumber] > 0 || awayGameTotals[gameNumber] > 0)) {
+                homeGamePoints[gameNumber] = 1;
+                awayGamePoints[gameNumber] = 1;
+                homePointsWon += 1;
+                awayPointsWon += 1;
+            }
+        }
+
+        // Calculate points for overall total pins
+        var homeOverallPoints = 0;
+        var awayOverallPoints = 0;
+        if (homeOverallTotal > awayOverallTotal) {
+            homeOverallPoints = 3;
+            homePointsWon += 3;
+        } else if (homeOverallTotal < awayOverallTotal) {
+            awayOverallPoints = 3;
+            awayPointsWon += 3;
+        } else if (homeOverallTotal === awayOverallTotal && (homeOverallTotal > 0 || awayOverallTotal > 0)) {
+            homeOverallPoints = 1.5;
+            awayOverallPoints = 1.5;
+            homePointsWon += 1.5;
+            awayPointsWon += 1.5;
+        }
+
+        // Update game points for each game
+        for (var gameNumber = 1; gameNumber <= 3; gameNumber++) {
+            var homeGamePointId = playerType + 'HomeGame' + gameNumber + 'PointTotals';
+            var awayGamePointId = playerType + 'awayGame' + gameNumber + 'PointTotals';
+
+            var homeGamePointElement = document.getElementById(homeGamePointId);
+            var awayGamePointElement = document.getElementById(awayGamePointId);
+
+            if (homeGamePointElement) {
+                homeGamePointElement.innerText = homeGamePoints[gameNumber - 1];
+            }
+            if (awayGamePointElement) {
+                awayGamePointElement.innerText = awayGamePoints[gameNumber - 1];
+            }
+        }
+
+        // Update overall point totals for most overall pins
+        var homeOverallPointTotalElement = document.getElementById(playerType + 'HomeGamePointTotalTotals');
+        var awayOverallPointTotalElement = document.getElementById(playerType + 'awayGamePointTotalTotals');
+
+        if (homeOverallPointTotalElement) {
+            homeOverallPointTotalElement.innerText = homeOverallPoints;
+        }
+        if (awayOverallPointTotalElement) {
+            awayOverallPointTotalElement.innerText = awayOverallPoints;
+        }
+
+        // Update points won and lost for both teams
+        var homePointsWonElement = document.getElementById(playerType + 'HomePointsWon');
+        var homePointsLostElement = document.getElementById(playerType + 'HomePointsLost');
+        var awayPointsWonElement = document.getElementById(playerType + 'AwayPointsWon');
+        var awayPointsLostElement = document.getElementById(playerType + 'AwayPointsLost');
+
+        if (homePointsWonElement) {
+            homePointsWonElement.innerText = homePointsWon;
+        }
+        if (homePointsLostElement) {
+            homePointsLostElement.innerText = awayPointsWon;
+        }
+        if (awayPointsWonElement) {
+            awayPointsWonElement.innerText = awayPointsWon;
+        }
+        if (awayPointsLostElement) {
+            awayPointsLostElement.innerText = homePointsWon;
+        }
+    });
+  }
+
+
+  function loadTeams() {
+    const divisionSelect = document.getElementById('divisionSelect');
+    const homeTeamDropdownSelect = document.getElementById('homeTeamDropdownSelect');
+    const awayTeamDropdownSelect = document.getElementById('awayTeamDropdownSelect');
+
+    homeTeamDropdownSelect.innerHTML = '<option value="" selected disabled>Select Home Team</option>';
+    awayTeamDropdownSelect.innerHTML = '<option value="" selected disabled>Select Away Team</option>';
+
+    if (divisionSelect.value) {
+      const selectedDivision = divisionSelect.value;
+
+      // Combine every league in the selected division (e.g. all four 4A leagues)
+      let filteredTeams = [];
+      Object.keys(LEAGUES).forEach(function (key) {
+        if (key.split('_')[0] === selectedDivision) {
+          filteredTeams = filteredTeams.concat(LEAGUES[key]);
+        }
+      });
+      filteredTeams.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+
+      // Populate dropdowns with the filtered teams
+      filteredTeams.forEach(team => {
+        const homeOption = document.createElement('option');
+        homeOption.value = team;
+        homeOption.textContent = team;
+        homeTeamDropdownSelect.appendChild(homeOption);
+
+        const awayOption = document.createElement('option');
+        awayOption.value = team;
+        awayOption.textContent = team;
+        awayTeamDropdownSelect.appendChild(awayOption);
+      });
+    }
+  }
+
+
+  function updateLocation() {
+    document.getElementById("girlsLocation").innerText = document.getElementById("locationDropdown").value;
+  }
+
+  function updateDate() {
+    const datePicker = document.getElementById("datePicker");
+    const girlsDateCell = document.getElementById("girlsDate");
+    const selectedDate = datePicker.value;
+
+    if (selectedDate) {
+      const dateObject = new Date(selectedDate + 'T00:00:00');
+      const formattedDate = (dateObject.getMonth() + 1).toString().padStart(2, '0') + '/' + dateObject.getDate().toString().padStart(2, '0') + '/' + dateObject.getFullYear();
+      girlsDateCell.innerText = formattedDate;
+    }
+  }
+
+  function submitForm() {
+    // Optional initial confirm
+    var userConfirmed = confirm('Are you sure you want to submit?');
+    if (!userConfirmed) return;
+
+    // These were for the old inline message areas; we can safely no-op if they don't exist
+    var linkElement = document.getElementById('sheetLinks');
+    if (linkElement) {
+      linkElement.style.display = 'none';
+      linkElement.innerHTML = '';
+    }
+
+    var errorMessageElement = document.getElementById('error-message');
+    if (errorMessageElement) {
+      errorMessageElement.style.display = 'none';
+      errorMessageElement.innerHTML = '';
+    }
+
+    var division = document.getElementById('divisionSelect').value;
+    // The server (Api.js, DIVISION_SHEET_IDS) maps "4A"/"5A" to the workbook.
+    // The name sheetId is kept so the calls below didn't have to change.
+    var sheetId;
+
+    var hardErrorFound = false;
+    var hardErrors = [];
+
+    if (division && division.indexOf('4A') === 0) {
+      sheetId = '4A';
+    } else if (division && division.indexOf('5A') === 0) {
+      sheetId = '5A';
+    } else {
+      hardErrors.push('Division is missing or invalid.');
+      hardErrorFound = true;
+    }
+
+    var homeTeam = document.getElementById('homeTeamDropdownSelect').value;
+    var awayTeam = document.getElementById('awayTeamDropdownSelect').value;
+    var location = document.getElementById('locationDropdown').value;
+    var date     = document.getElementById('datePicker').value;
+
+    if (!homeTeam) {
+      hardErrors.push('Home Team is required.');
+      hardErrorFound = true;
+    }
+    if (!awayTeam) {
+      hardErrors.push('Away Team is required.');
+      hardErrorFound = true;
+    }
+    if (!location) {
+      hardErrors.push('Location is required.');
+      hardErrorFound = true;
+    }
+    if (!date) {
+      hardErrors.push('Date is required.');
+      hardErrorFound = true;
+    }
+
+    // Hard errors: show modal and stop
+    if (hardErrorFound) {
+      var bodyHtml =
+        '<p>Please correct the following before submitting:</p><ul>' +
+        hardErrors.map(function (e) { return '<li>' + e + '</li>'; }).join('') +
+        '</ul>';
+
+      showMessageOverlay({
+        title: 'Missing Required Information',
+        bodyHtml: bodyHtml,
+        primaryText: 'OK'
+      });
+
+      return;
+    }
+
+    // --- Collect data ---
+
+    var boysHomePlayers = [];
+    var boysAwayPlayers = [];
+    var boysHomeScores  = [[], [], []];
+    var boysAwayScores  = [[], [], []];
+    var girlsHomePlayers = [];
+    var girlsAwayPlayers = [];
+    var girlsHomeScores  = [[], [], []];
+    var girlsAwayScores  = [[], [], []];
+
+    var i, j;
+
+    for (i = 1; i <= 12; i++) {
+      boysHomePlayers.push(document.getElementById('boysHomePlayer' + i).value || '');
+      boysAwayPlayers.push(document.getElementById('boysAwayPlayer' + i).value || '');
+      girlsHomePlayers.push(document.getElementById('girlsHomePlayer' + i).value || '');
+      girlsAwayPlayers.push(document.getElementById('girlsAwayPlayer' + i).value || '');
+
+      for (j = 1; j <= 3; j++) {
+        boysHomeScores[j - 1].push(document.getElementById('boysHomePlayer'  + i + 'Game' + j).value || '');
+        boysAwayScores[j - 1].push(document.getElementById('boysAwayPlayer'  + i + 'Game' + j).value || '');
+        girlsHomeScores[j - 1].push(document.getElementById('girlsHomePlayer' + i + 'Game' + j).value || '');
+        girlsAwayScores[j - 1].push(document.getElementById('girlsAwayPlayer' + i + 'Game' + j).value || '');
+      }
+    }
+
+    // --- Soft validation / warnings ---
+
+    var boysHasData = false;
+    var girlsHasData = false;
+    var missingNameScoreWarnings = [];
+
+    for (var row = 0; row < 12; row++) {
+      var bhName = (boysHomePlayers[row]  || '').trim();
+      var baName = (boysAwayPlayers[row]  || '').trim();
+      var ghName = (girlsHomePlayers[row] || '').trim();
+      var gaName = (girlsAwayPlayers[row] || '').trim();
+
+      var bhHasScore = false;
+      var baHasScore = false;
+      var ghHasScore = false;
+      var gaHasScore = false;
+
+      for (var g = 0; g < 3; g++) {
+        var bhScore = (boysHomeScores[g][row]  || '').trim();
+        var baScore = (boysAwayScores[g][row]  || '').trim();
+        var ghScore = (girlsHomeScores[g][row] || '').trim();
+        var gaScore = (girlsAwayScores[g][row] || '').trim();
+
+        if (bhScore !== '') bhHasScore = true;
+        if (baScore !== '') baHasScore = true;
+        if (ghScore !== '') ghHasScore = true;
+        if (gaScore !== '') gaHasScore = true;
+      }
+
+      if (bhName || baName || bhHasScore || baHasScore) {
+        boysHasData = true;
+      }
+      if (ghName || gaName || ghHasScore || gaHasScore) {
+        girlsHasData = true;
+      }
+
+      if (bhHasScore && !bhName) {
+        missingNameScoreWarnings.push('Boys Home, row ' + (row + 1));
+      }
+      if (baHasScore && !baName) {
+        missingNameScoreWarnings.push('Boys Away, row ' + (row + 1));
+      }
+      if (ghHasScore && !ghName) {
+        missingNameScoreWarnings.push('Girls Home, row ' + (row + 1));
+      }
+      if (gaHasScore && !gaName) {
+        missingNameScoreWarnings.push('Girls Away, row ' + (row + 1));
+      }
+    }
+
+    var softWarnings = [];
+
+    if (!boysHasData && !girlsHasData) {
+      softWarnings.push(
+        'You have not entered any players or scores for either the boys or girls team.'
+      );
+    } else if (boysHasData && !girlsHasData) {
+      softWarnings.push(
+        'You have entered data for the <strong>BOYS</strong> team, but nothing for the <strong>GIRLS</strong> team. This system is designed for submitting both teams together.'
+      );
+    } else if (!boysHasData && girlsHasData) {
+      softWarnings.push(
+        'You have entered data for the <strong>GIRLS</strong> team, but nothing for the <strong>BOYS</strong> team. This system is designed for submitting both teams together.'
+      );
+    }
+
+    if (missingNameScoreWarnings.length > 0) {
+      var exampleList = '';
+      var maxExamples = missingNameScoreWarnings.length > 10 ? 10 : missingNameScoreWarnings.length;
+      for (var k = 0; k < maxExamples; k++) {
+        exampleList += '<li>' + missingNameScoreWarnings[k] + '</li>';
+      }
+      if (missingNameScoreWarnings.length > 10) {
+        exampleList += '<li>...and more</li>';
+      }
+
+      softWarnings.push(
+        'Some player rows have scores entered but no player name. Examples:<br><ul>' +
+        exampleList +
+        '</ul>'
+      );
+    }
+
+    // If there are soft warnings, show an overlay with 2 buttons
+    if (softWarnings.length > 0) {
+      var swBody =
+        '<p>Please review the following before submitting:</p><ul>' +
+        softWarnings.map(function (w) { return '<li>' + w + '</li>'; }).join('') +
+        '</ul><p>You may go back to make changes, or submit anyway.</p>';
+
+      showMessageOverlay({
+        title: 'Check Your Submission',
+        bodyHtml: swBody,
+        primaryText: 'Submit Anyway',
+        secondaryText: 'Go Back & Fix',
+        onPrimary: function () {
+          actuallySubmitMatch(
+            sheetId,
+            homeTeam,
+            awayTeam,
+            location,
+            date,
+            boysHomePlayers,
+            boysHomeScores,
+            boysAwayPlayers,
+            boysAwayScores,
+            girlsHomePlayers,
+            girlsHomeScores,
+            girlsAwayPlayers,
+            girlsAwayScores
+          );
+        },
+        onSecondary: function () {
+          // Coach goes back; do nothing
+        }
+      });
+
+      return;  // wait for their choice
+    }
+
+    // 🔹 NO SOFT WARNINGS: submit immediately
+    actuallySubmitMatch(
+      sheetId,
+      homeTeam,
+      awayTeam,
+      location,
+      date,
+      boysHomePlayers,
+      boysHomeScores,
+      boysAwayPlayers,
+      boysAwayScores,
+      girlsHomePlayers,
+      girlsHomeScores,
+      girlsAwayPlayers,
+      girlsAwayScores
+    );
+  }
+
+
+  function actuallySubmitMatch(
+    sheetId,
+    homeTeam,
+    awayTeam,
+    location,
+    date,
+    boysHomePlayers,
+    boysHomeScores,
+    boysAwayPlayers,
+    boysAwayScores,
+    girlsHomePlayers,
+    girlsHomeScores,
+    girlsAwayPlayers,
+    girlsAwayScores
+  ) {
+    document.body.style.pointerEvents = 'none';
+    showLoadingOverlay('Submitting...');
+
+    callApi('submit', {
+      division: sheetId,
+      homeTeam: homeTeam,
+      awayTeam: awayTeam,
+      location: location,
+      date: date,
+      boysHomePlayers: boysHomePlayers,
+      boysHomeScores: boysHomeScores,
+      boysAwayPlayers: boysAwayPlayers,
+      boysAwayScores: boysAwayScores,
+      girlsHomePlayers: girlsHomePlayers,
+      girlsHomeScores: girlsHomeScores,
+      girlsAwayPlayers: girlsAwayPlayers,
+      girlsAwayScores: girlsAwayScores
+    })
+      .then(function (response) {
+        response = response || {};
+        document.body.style.pointerEvents = 'auto';
+        hideLoadingOverlay();
+
+        var success   = !!response.success;
+        var problems  = response.problems || [];
+        var hasProblems = problems.length > 0;
+        var title     = !success ? 'Submission Error'
+                      : hasProblems ? 'Submitted With Problems'
+                      : 'Submission Successful';
+
+        // Short, clean message
+        var bodyHtml;
+        if (success) {
+          bodyHtml = hasProblems
+            ? '<p>Part of the match was saved, but some of it was NOT. Your entries have been kept on this page.</p>'
+            : '<p>Matches successfully submitted.</p>';
+        } else {
+          bodyHtml = '<p>' + (response.feedback || '') + '</p>';
+        }
+        // Scores are saved even if the summary email fails, so this is just a note
+        if (success && response.emailSent === false) {
+          console.warn('Summary email not sent:', response.emailError);
+          bodyHtml += '<p style="color:#a15c00;">Note: the summary email could not be sent' +
+            (response.emailError ? ' (' + String(response.emailError).replace(/</g, '&lt;') + ')' : '') +
+            '. Your scores ARE saved.</p>';
+        }
+        if (hasProblems) {
+          console.warn('Submission problems:', problems);
+          bodyHtml += '<p><strong>Problems:</strong></p><ul>' +
+            problems.map(function (p) {
+              return '<li>' + String(p).replace(/</g, '&lt;') + '</li>';
+            }).join('') + '</ul>';
+        }
+
+        var linksHtml = '';
+
+        if (response.links && response.links.length) {
+          linksHtml += '<p>To view on the spreadsheet, use the links below:</p>';
+
+          response.links.forEach(function (linkData) {
+            var id      = linkData.sheetId;
+            var gid     = linkData.gid;
+            var row     = linkData.row;
+            var team    = linkData.teamName;
+            var gender  = linkData.gender || '';   // "Boys" / "Girls" if present
+
+            var link = 'https://docs.google.com/spreadsheets/d/' +
+                      id +
+                      '/edit#gid=' + gid +
+                      '&range=A' + (row - 1);
+
+            var label = team;
+            if (gender) {
+              label = team + ' ' + gender;         // e.g. "Arbor_View Boys"
+            }
+
+            linksHtml += '<a href="' + link + '" target="_blank">' +
+                        label + '</a><br>';
+          });
+        }
+
+        showMessageOverlay({
+          title: title,
+          bodyHtml: bodyHtml,
+          linksHtml: linksHtml,
+          primaryText: 'Close',
+          onPrimary: function () {
+            // Keep the form filled in if anything went wrong, so nothing is lost
+            if (success && !hasProblems && typeof clearEntriesAfterSuccessfulSubmission === 'function') {
+              clearEntriesAfterSuccessfulSubmission();
+            }
+          }
+        });
+      })
+      .catch(function (error) {
+        document.body.style.pointerEvents = 'auto';
+        hideLoadingOverlay();
+        console.error('Failed to submit match details:', error);
+
+        // A network drop can happen after the sheet was already written, so
+        // tell the coach to check before re-submitting (a re-submit would just
+        // be blocked as a duplicate, which is harmless).
+        showMessageOverlay({
+          title: 'Submission Error',
+          bodyHtml: '<p>Error submitting match details. Your entries are still on this page. Please try again.</p>' +
+                    '<p>If it says the match is a duplicate, the first try went through.</p>',
+          primaryText: 'OK'
+        });
+      });
+  }
+
+
+
+// Function to display error or success message in the HTML page
+function displayErrorMessage(message, isSuccess = false) {
+  const errorMessageElement = document.getElementById('error-message');
+  if(!isSuccess){
+    errorMessageElement.innerText = 'Error: '+ message;
+  } else {
+    errorMessageElement.innerText = message;
+  }
+  errorMessageElement.style.color = isSuccess ? 'green' : 'red';
+  errorMessageElement.style.display = 'block';
+}
+
+
+  // Function to handle home team selection
+function homeTeamSelection() {
+  var homeTeam = document.getElementById("homeTeamDropdownSelect").value;
+
+  // Special case handling
+  // var girlsHomeTeam = (homeTeam === "SLAM_Nevada") ? "Equipo" : homeTeam;
+  // document.getElementById("girlsHomeTeam").innerText = girlsHomeTeam;
+    document.getElementById("girlsHomeTeam").innerText = homeTeam;
+
+  var school = rosterData.find(function(school) {
+    return school.school_name === homeTeam;
+  });
+
+  if (school) {
+    // Handle boys roster
+    handleRosterDropdowns("boysHomePlayer", school.boys_roster);
+
+    // Find girls' school for "SLAM_Nevada" or handle normally
+    // var girlsSchool = (homeTeam === "SLAM_Nevada") 
+    //   ? rosterData.find(function(school) { return school.school_name === "Equipo"; })
+    //   : school;
+
+    //handleRosterDropdowns("girlsHomePlayer", girlsSchool ? girlsSchool.girls_roster : []);
+    handleRosterDropdowns("girlsHomePlayer", school.girls_roster);
+  } else {
+    clearAllPlayerDropdowns("boysHomePlayer");
+    clearAllPlayerDropdowns("girlsHomePlayer");
+  }
+
+  attachEventListeners();
+}
+
+
+
+function awayTeamSelection() {
+  var awayTeam = document.getElementById("awayTeamDropdownSelect").value;
+
+  // Special case handling
+  //var girlsAwayTeam = (awayTeam === "SLAM_Nevada") ? "Equipo" : awayTeam;
+  //document.getElementById("girlsAwayTeam").innerText = girlsAwayTeam;
+  document.getElementById("girlsAwayTeam").innerText = awayTeam;
+  var school = rosterData.find(function(school) {
+    return school.school_name === awayTeam;
+  });
+
+  if (school) {
+    // Handle boys roster
+    handleRosterDropdowns("boysAwayPlayer", school.boys_roster);
+
+    // Find girls' school for "SLAM_Nevada" or handle normally
+    // var girlsSchool = (awayTeam === "SLAM_Nevada") 
+    //   ? rosterData.find(function(school) { return school.school_name === "Equipo"; })
+    //   : school;
+
+    //handleRosterDropdowns("girlsAwayPlayer", girlsSchool ? girlsSchool.girls_roster : []);
+    handleRosterDropdowns("girlsAwayPlayer", school.girls_roster);
+  } else {
+    clearAllPlayerDropdowns("boysAwayPlayer");
+    clearAllPlayerDropdowns("girlsAwayPlayer");
+  }
+
+  attachEventListeners();
+}
+
+function handleRosterDropdowns(prefix, roster) {
+  for (var i = 1; i <= 12; i++) {
+    var select = document.getElementById(prefix + i);
+    select.innerHTML = '<option value="" selected></option>';
+    if (roster && roster.length > 0) {
+      roster.forEach(function(player) {
+        var option = document.createElement("option");
+        option.value = player.name;
+        option.textContent = player.name;
+        select.appendChild(option);
+      });
+    }
+  }
+}
+
+function clearAllPlayerDropdowns(prefix) {
+  for (var i = 1; i <= 12; i++) {
+    var select = document.getElementById(prefix + i);
+    if (select) {
+      select.innerHTML = '<option value="" selected></option>';
+    }
+  }
+}
+</script>
+  </head>
+  <body>
+    <header>
+      <h1 style="color:black;">Southern Nevada Bowling Match Submission</h1>
+    </header>
+   <div id="loadingOverlay">
+      <div class="spinner">
+        <svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 24 24">
+            <path fill="black" d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10s10-4.486 10-10S17.514 2 12 2m0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8s8 3.589 8 8s-3.589 8-8 8"/>
+            <circle cx="7.5" cy="10.5" r="1.5" fill="black"/>
+            <circle cx="10.5" cy="7.5" r="1.5" fill="black"/>
+            <circle cx="11.5" cy="11.5" r="1.5" fill="black"/>
+        </svg>
+      </div>
+      <div class="loadingText">Please wait...</div>
+    </div>
+
+    <!-- NEW: generic message / warning / result overlay -->
+    <div id="messageOverlay" style="display:none;">
+      <div class="messageOverlay-content">
+        <h2 id="messageTitle"></h2>
+        <div id="messageBody"></div>
+        <div id="messageLinks"></div>
+        <div class="messageOverlay-buttons">
+          <button id="messagePrimaryBtn" class="button-30 submit-anyway-button" type="button">OK</button>
+          <button id="messageSecondaryBtn" class="button-30 submit-anyway-button" type="button" style="display:none;">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="sheetLinks" style="display: none;"></div>
+    <div id="error-message" style="color: red; font-size: 20px; display: none;"></div> -->
+   
+    <div id="header-buttons-div">
+      <button class="button-30" onclick="clearAllEntries()">Clear All</button>
+      <select id="divisionSelect" onchange="loadTeams()">
+        <option value="" selected disabled>Select Division</option>
+        <option value="5A">5A</option>
+        <option value="4A">4A</option>
+      </select>
+      <button class="button-30" onclick="submitForm()">Submit Match</button>
+    </div>
+    <main>
+      <h2>Boys Match</h2>
+      <table class="bowling-scores boys-team">
+        <tr>
+            <td class="header-cell" colspan="1" style="text-align: right; padding-right: 10px;">Location:</td>
+            <td class="data-cell" colspan="4"><select class="dlhaDropdowns" id="locationDropdown" onchange="updateLocation()">
+              <option value="" selected disabled>Select Location</option>
+              <option value="Gold Coast">Gold Coast</option>
+              <option value="Orleans">Orleans</option>
+              <option value="Sams Town">Sams Town</option>
+              <option value="Santa Fe">Santa Fe</option>
+              <option value="South Point">South Point</option>
+              <option value="Sun Coast">Sun Coast</option>
+              <option value="Sunset">Sunset</option>
+              <option value="Virgin River">Virgin River</option>
+            </select></td>
+            <td class="header-cell" colspan="1" style="text-align: right; padding-right: 10px;">Date:</td>
+            <td class="data-cell" colspan="4"><input type="date" id="datePicker" onchange="updateDate()"></td>
+        </tr>
+        <tr>
+          <td class="header-cell" colspan="1" style="text-align: right; padding-right: 10px;">Away Team:</td>
+            <td class="data-cell" colspan="4"><select class="dlhaDropdowns" id="awayTeamDropdownSelect" onchange="awayTeamSelection()">
+          <option value="" selected disabled>Select Team</option>
+        </select></td>
+            <td class="header-cell" colspan="1" style="text-align: right; padding-right: 10px;">Home Team:</td>
+            <td class="data-cell" colspan="4"><select class="dlhaDropdowns" id="homeTeamDropdownSelect" onchange="homeTeamSelection()">
+          <option value="" selected disabled>Select Team</option>
+        </select></td>
+            
+        </tr>
+        <tr>
+          <td class="header-cell" colspan="1">Player</td>
+          <td class="header-cell" colspan="1">Game 1</td>
+          <td class="header-cell" colspan="1">Game 2</td>
+          <td class="header-cell" colspan="1">Game 3</td>
+          <td class="header-cell" colspan="1">Total</td>
+          <td class="header-cell" colspan="1">Player</td>
+          <td class="header-cell" colspan="1">Game 1</td>
+          <td class="header-cell" colspan="1">Game 2</td>
+          <td class="header-cell" colspan="1">Game 3</td>
+          <td class="header-cell" colspan="1">Total</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown1" colspan="1"><select class="playerDropdown" id="boysAwayPlayer1"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer1Game1" name="boysAwayPlayer1Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer1Game2" name="boysAwayPlayer1Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer1Game3" name="boysAwayPlayer1Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer1Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown1" colspan="1"><select class="playerDropdown" id="boysHomePlayer1"><option value="" selected></option></select></td> 
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer1Game1" name="boysHomePlayer1Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer1Game2" name="boysHomePlayer1Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer1Game3" name="boysHomePlayer1Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer1Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown2" colspan="1"><select class="playerDropdown" id="boysAwayPlayer2"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer2Game1" name="boysAwayPlayer2Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer2Game2" name="boysAwayPlayer2Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer2Game3" name="boysAwayPlayer2Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer2Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown2" colspan="1"><select class="playerDropdown" id="boysHomePlayer2"><option value="" selected></option></select></td> 
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer2Game1" name="boysHomePlayer2Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer2Game2" name="boysHomePlayer2Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer2Game3" name="boysHomePlayer2Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer2Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown3" colspan="1"><select class="playerDropdown" id="boysAwayPlayer3"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer3Game1" name="boysAwayPlayer3Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer3Game2" name="boysAwayPlayer3Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer3Game3" name="boysAwayPlayer3Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer3Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown3" colspan="1"><select class="playerDropdown" id="boysHomePlayer3"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer3Game1" name="boysHomePlayer3Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer3Game2" name="boysHomePlayer3Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer3Game3" name="boysHomePlayer3Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer3Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown4" colspan="1"><select class="playerDropdown" id="boysAwayPlayer4"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer4Game1" name="boysAwayPlayer4Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer4Game2" name="boysAwayPlayer4Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer4Game3" name="boysAwayPlayer4Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer4Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown4" colspan="1"><select class="playerDropdown" id="boysHomePlayer4"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer4Game1" name="boysHomePlayer4Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer4Game2" name="boysHomePlayer4Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer4Game3" name="boysHomePlayer4Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer4Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown5" colspan="1"><select class="playerDropdown" id="boysAwayPlayer5"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer5Game1" name="boysAwayPlayer5Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer5Game2" name="boysAwayPlayer5Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer5Game3" name="boysAwayPlayer5Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer5Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown5" colspan="1"><select class="playerDropdown" id="boysHomePlayer5"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer5Game1" name="boysHomePlayer5Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer5Game2" name="boysHomePlayer5Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer5Game3" name="boysHomePlayer5Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer5Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown6" colspan="1"><select class="playerDropdown" id="boysAwayPlayer6"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer6Game1" name="boysAwayPlayer6Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer6Game2" name="boysAwayPlayer6Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer6Game3" name="boysAwayPlayer6Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer6Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown6" colspan="1"><select class="playerDropdown" id="boysHomePlayer6"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer6Game1" name="boysHomePlayer6Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer6Game2" name="boysHomePlayer6Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer6Game3" name="boysHomePlayer6Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer6Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown7" colspan="1"><select class="playerDropdown" id="boysAwayPlayer7"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer7Game1" name="boysAwayPlayer7Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer7Game2" name="boysAwayPlayer7Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer7Game3" name="boysAwayPlayer7Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer7Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown7" colspan="1"><select class="playerDropdown" id="boysHomePlayer7"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer7Game1" name="boysHomePlayer7Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer7Game2" name="boysHomePlayer7Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer7Game3" name="boysHomePlayer7Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer7Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown8" colspan="1"><select class="playerDropdown" id="boysAwayPlayer8"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer8Game1" name="boysAwayPlayer8Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer8Game2" name="boysAwayPlayer8Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer8Game3" name="boysAwayPlayer8Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer8Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown8" colspan="1"><select class="playerDropdown" id="boysHomePlayer8"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer8Game1" name="boysHomePlayer8Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer8Game2" name="boysHomePlayer8Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer8Game3" name="boysHomePlayer8Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer8Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown9" colspan="1"><select class="playerDropdown" id="boysAwayPlayer9"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer9Game1" name="boysAwayPlayer9Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer9Game2" name="boysAwayPlayer9Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer9Game3" name="boysAwayPlayer9Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer9Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown9" colspan="1"><select class="playerDropdown" id="boysHomePlayer9"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer9Game1" name="boysHomePlayer9Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer9Game2" name="boysHomePlayer9Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer9Game3" name="boysHomePlayer9Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer9Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown10" colspan="1"><select class="playerDropdown" id="boysAwayPlayer10"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer10Game1" name="boysAwayPlayer10Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer10Game2" name="boysAwayPlayer10Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer10Game3" name="boysAwayPlayer10Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer10Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown10" colspan="1"><select class="playerDropdown" id="boysHomePlayer10"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer10Game1" name="boysHomePlayer10Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer10Game2" name="boysHomePlayer10Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer10Game3" name="boysHomePlayer10Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer10Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown11" colspan="1"><select class="playerDropdown" id="boysAwayPlayer11"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer11Game1" name="boysAwayPlayer11Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer11Game2" name="boysAwayPlayer11Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer11Game3" name="boysAwayPlayer11Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer11Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown11" colspan="1"><select class="playerDropdown" id="boysHomePlayer11"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer11Game1" name="boysHomePlayer11Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer11Game2" name="boysHomePlayer11Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer11Game3" name="boysHomePlayer11Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer11Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="boysAwayPlayerDropdown12" colspan="1"><select class="playerDropdown" id="boysAwayPlayer12"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer12Game1" name="boysAwayPlayer12Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer12Game2" name="boysAwayPlayer12Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysAwayPlayer12Game3" name="boysAwayPlayer12Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysAwayPlayer12Total" colspan="1">0</td>
+          <td class="data-cell" id="boysHomePlayerDropdown12" colspan="1"><select class="playerDropdown" id="boysHomePlayer12"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer12Game1" name="boysHomePlayer12Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer12Game2" name="boysHomePlayer12Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="boysHomePlayer12Game3" name="boysHomePlayer12Game3" placeholder="0"></td>
+          <td class="header-cell" id="boysHomePlayer12Total" colspan="1">0</td>
+        </tr>
+        <tr>
+            <td class="header-cell" colspan="1" style="text-align: right; padding-right: 10px;">Totals:</td> 
+            <td class="header-cell" id="boysAwayGame1Totals" colspan="1">0</td> 
+            <td class="header-cell" id="boysAwayGame2Totals" colspan="1">0</td> 
+            <td class="header-cell" id="boysAwayGame3Totals" colspan="1">0</td> 
+            <td class="header-cell" id="boysAwayGameTotalTotals" colspan="1">0</td> 
+            <td class="header-cell" colspan="1" style="text-align: right; padding-right: 10px;">Totals:</td> 
+            <td class="header-cell" id="boysHomeGame1Totals" colspan="1">0</td> 
+            <td class="header-cell" id="boysHomeGame2Totals" colspan="1">0</td> 
+            <td class="header-cell" id="boysHomeGame3Totals" colspan="1">0</td> 
+            <td class="header-cell" id="boysHomeGameTotalTotals"colspan="1">0</td> 
+        </tr>
+        <tr>
+          <td class="header-cell" colspan="1" style="text-align: right; padding-right: 10px;">Point Totals:</td> 
+            <td class="header-cell" id="boysawayGame1PointTotals" colspan="1">0</td> 
+            <td class="header-cell" id="boysawayGame2PointTotals" colspan="1">0</td> 
+            <td class="header-cell" id="boysawayGame3PointTotals" colspan="1">0</td> 
+            <td class="header-cell" id="boysawayGamePointTotalTotals"colspan="1">0</td> 
+            <td class="header-cell" colspan="1" style="text-align: right; padding-right: 10px;">Point Totals:</td> 
+            <td class="header-cell" id="boysHomeGame1PointTotals" colspan="1">0</td> 
+            <td class="header-cell" id="boysHomeGame2PointTotals" colspan="1">0</td> 
+            <td class="header-cell" id="boysHomeGame3PointTotals" colspan="1">0</td> 
+            <td class="header-cell" id="boysHomeGamePointTotalTotals"colspan="1">0</td> 
+        </tr>
+        <tr>
+          <td colspan="1" style="background-color: #d9d9d9; border-bottom: 0px; border-left: 0px;"></td> 
+            <td class="header-cell" colspan="1">Pts Won:</td> 
+            <td class="header-cell" id="boysAwayPointsWon" colspan="1">0</td> 
+            <td class="header-cell" colspan="1">Pts Lost:</td> 
+            <td class="header-cell" id="boysAwayPointsLost" colspan="1">0</td> 
+            <td colspan="1" style="background-color: #d9d9d9; border-bottom: 0px; border-left: 0px;"></td> 
+            <td class="header-cell" colspan="1">Pts Won:</td> 
+            <td class="header-cell" id="boysHomePointsWon" colspan="1">0</td> 
+            <td class="header-cell" colspan="1">Pts Lost:</td> 
+            <td class="header-cell" id="boysHomePointsLost" colspan="1">0</td> 
+        </tr>
+      </table>
+      <h2>Girls Match</h2>
+      <table class="bowling-scores girls-team">
+        <tr>
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Location:</td>
+            <td id="girlsLocation" class="data-cell" colspan="4" style="text-align: left; padding-left: 6px;">Location</td>
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Date:</td>
+            <td id="girlsDate" class="data-cell" colspan="4" style="text-align: left; padding-left: 6px;">mm/dd/yyyy</td>
+        </tr>
+        <tr>
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Away Team:</td>
+            <td id="girlsAwayTeam" class="data-cell" colspan="4" style="text-align: left; padding-left: 6px;">Away Team</td>
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Home Team:</td>
+            <td id="girlsHomeTeam" class="data-cell" colspan="4" style="text-align: left; padding-left: 6px;">Home Team</td>
+        </tr>
+        <tr>
+            <td class="header-cell-girls" colspan="1">Player</td>
+            <td class="header-cell-girls" colspan="1">Game 1</td>
+            <td class="header-cell-girls" colspan="1">Game 2</td>
+            <td class="header-cell-girls" colspan="1">Game 3</td>
+            <td class="header-cell-girls" colspan="1">Total</td>
+            <td class="header-cell-girls" colspan="1">Player</td>
+            <td class="header-cell-girls" colspan="1">Game 1</td>
+            <td class="header-cell-girls" colspan="1">Game 2</td>
+            <td class="header-cell-girls" colspan="1">Game 3</td>
+            <td class="header-cell-girls" colspan="1">Total</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown1" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer1"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer1Game1" name="girlsAwayPlayer1Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer1Game2" name="girlsAwayPlayer1Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer1Game3" name="girlsAwayPlayer1Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer1Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown1" colspan="1"><select class="playerDropdown" id="girlsHomePlayer1"><option value="" selected></option></select></td> 
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer1Game1" name="girlsHomePlayer1Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer1Game2" name="girlsHomePlayer1Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer1Game3" name="girlsHomePlayer1Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer1Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown2" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer2"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer2Game1" name="girlsAwayPlayer2Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer2Game2" name="girlsAwayPlayer2Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer2Game3" name="girlsAwayPlayer2Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer2Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown2" colspan="1"><select class="playerDropdown" id="girlsHomePlayer2"><option value="" selected></option></select></td> 
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer2Game1" name="girlsHomePlayer2Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer2Game2" name="girlsHomePlayer2Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer2Game3" name="girlsHomePlayer2Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer2Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown3" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer3"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer3Game1" name="girlsAwayPlayer3Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer3Game2" name="girlsAwayPlayer3Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer3Game3" name="girlsAwayPlayer3Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer3Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown3" colspan="1"><select class="playerDropdown" id="girlsHomePlayer3"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer3Game1" name="girlsHomePlayer3Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer3Game2" name="girlsHomePlayer3Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer3Game3" name="girlsHomePlayer3Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer3Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown4" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer4"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer4Game1" name="girlsAwayPlayer4Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer4Game2" name="girlsAwayPlayer4Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer4Game3" name="girlsAwayPlayer4Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer4Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown4" colspan="1"><select class="playerDropdown" id="girlsHomePlayer4"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer4Game1" name="girlsHomePlayer4Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer4Game2" name="girlsHomePlayer4Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer4Game3" name="girlsHomePlayer4Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer4Total" colspan="1">0</td> 
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown5" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer5"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer5Game1" name="girlsAwayPlayer5Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer5Game2" name="girlsAwayPlayer5Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer5Game3" name="girlsAwayPlayer5Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer5Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown5" colspan="1"><select class="playerDropdown" id="girlsHomePlayer5"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer5Game1" name="girlsHomePlayer5Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer5Game2" name="girlsHomePlayer5Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer5Game3" name="girlsHomePlayer5Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer5Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown6" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer6"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer6Game1" name="girlsAwayPlayer6Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer6Game2" name="girlsAwayPlayer6Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer6Game3" name="girlsAwayPlayer6Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer6Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown6" colspan="1"><select class="playerDropdown" id="girlsHomePlayer6"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer6Game1" name="girlsHomePlayer6Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer6Game2" name="girlsHomePlayer6Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer6Game3" name="girlsHomePlayer6Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer6Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown7" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer7"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer7Game1" name="girlsAwayPlayer7Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer7Game2" name="girlsAwayPlayer7Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer7Game3" name="girlsAwayPlayer7Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer7Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown7" colspan="1"><select class="playerDropdown" id="girlsHomePlayer7"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer7Game1" name="girlsHomePlayer7Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer7Game2" name="girlsHomePlayer7Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer7Game3" name="girlsHomePlayer7Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer7Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown8" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer8"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer8Game1" name="girlsAwayPlayer8Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer8Game2" name="girlsAwayPlayer8Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer8Game3" name="girlsAwayPlayer8Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer8Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown8" colspan="1"><select class="playerDropdown" id="girlsHomePlayer8"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer8Game1" name="girlsHomePlayer8Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer8Game2" name="girlsHomePlayer8Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer8Game3" name="girlsHomePlayer8Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer8Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown9" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer9"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer9Game1" name="girlsAwayPlayer9Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer9Game2" name="girlsAwayPlayer9Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer9Game3" name="girlsAwayPlayer9Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer9Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown9" colspan="1"><select class="playerDropdown" id="girlsHomePlayer9"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer9Game1" name="girlsHomePlayer9Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer9Game2" name="girlsHomePlayer9Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer9Game3" name="girlsHomePlayer9Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer9Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown10" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer10"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer10Game1" name="girlsAwayPlayer10Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer10Game2" name="girlsAwayPlayer10Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer10Game3" name="girlsAwayPlayer10Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer10Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown10" colspan="1"><select class="playerDropdown" id="girlsHomePlayer10"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer10Game1" name="girlsHomePlayer10Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer10Game2" name="girlsHomePlayer10Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer10Game3" name="girlsHomePlayer10Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer10Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown11" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer11"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer11Game1" name="girlsAwayPlayer11Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer11Game2" name="girlsAwayPlayer11Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer11Game3" name="girlsAwayPlayer11Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer11Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown11" colspan="1"><select class="playerDropdown" id="girlsHomePlayer11"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer11Game1" name="girlsHomePlayer11Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer11Game2" name="girlsHomePlayer11Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer11Game3" name="girlsHomePlayer11Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer11Total" colspan="1">0</td>
+        </tr>
+        <tr>
+          <td class="data-cell" id="girlsAwayPlayerDropdown12" colspan="1"><select class="playerDropdown" id="girlsAwayPlayer12"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer12Game1" name="girlsAwayPlayer12Game1" placeholder="0" onchange=""></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer12Game2" name="girlsAwayPlayer12Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsAwayPlayer12Game3" name="girlsAwayPlayer12Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsAwayPlayer12Total" colspan="1">0</td>
+          <td class="data-cell" id="girlsHomePlayerDropdown12" colspan="1"><select class="playerDropdown" id="girlsHomePlayer12"><option value="" selected></option></select></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer12Game1" name="girlsHomePlayer12Game1" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer12Game2" name="girlsHomePlayer12Game2" placeholder="0"></td>
+          <td class="data-cell" colspan="1"><input type="number" class="scoreInput" id="girlsHomePlayer12Game3" name="girlsHomePlayer12Game3" placeholder="0"></td>
+          <td class="header-cell-girls" id="girlsHomePlayer12Total" colspan="1">0</td>
+        </tr>
+        <tr>
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Totals:</td> 
+            <td class="header-cell-girls" id="girlsAwayGame1Totals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsAwayGame2Totals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsAwayGame3Totals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsAwayGameTotalTotals" colspan="1">0</td> 
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Totals:</td> 
+            <td class="header-cell-girls" id="girlsHomeGame1Totals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsHomeGame2Totals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsHomeGame3Totals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsHomeGameTotalTotals"colspan="1">0</td> 
+        </tr>
+        <tr>
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Point Totals:</td> 
+            <td class="header-cell-girls" id="girlsawayGame1PointTotals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsawayGame2PointTotals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsawayGame3PointTotals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsawayGamePointTotalTotals"colspan="1">0</td> 
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Point Totals:</td> 
+            <td class="header-cell-girls" id="girlsHomeGame1PointTotals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsHomeGame2PointTotals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsHomeGame3PointTotals" colspan="1">0</td> 
+            <td class="header-cell-girls" id="girlsHomeGamePointTotalTotals"colspan="1">0</td> 
+        </tr>
+        <tr>
+            <td colspan="1" style="background-color: #d9d9d9; border-bottom: 0px; border-left: 0px;"></td> 
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Pts Won:</td> 
+            <td class="header-cell-girls" id="girlsAwayPointsWon" colspan="1">0</td> 
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Pts Lost:</td> 
+            <td class="header-cell-girls" id="girlsAwayPointsLost" colspan="1">0</td> 
+            <td colspan="1" style="background-color: #d9d9d9; border-bottom: 0px; border-left: 0px;"></td> 
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Pts Won:</td> 
+            <td class="header-cell-girls" id="girlsHomePointsWon" colspan="1">0</td> 
+            <td class="header-cell-girls" colspan="1" style="text-align: right; padding-right: 10px;">Pts Lost:</td> 
+            <td class="header-cell-girls" id="girlsHomePointsLost" colspan="1">0</td>  
+        </tr>
+      </table>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connection check</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 3rem auto; padding: 0 1rem; line-height: 1.5; }
+    .ok { color: #1a7f37; } .bad { color: #b42318; }
+    code { background: #f2f2f2; padding: 0 .3em; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <h1>Connection check</h1>
+  <p>Checks the whole chain: this site → Cloudflare relay → Apps Script (key check).</p>
+  <p id="result">Checking…</p>
+  <script>
+    fetch('/api/ping', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var el = document.getElementById('result');
+        if (j.success) {
+          el.className = 'ok';
+          el.textContent = 'Working. Apps Script answered at ' + j.time + '.';
+        } else {
+          el.className = 'bad';
+          el.textContent = 'Not working: ' + (j.feedback || 'unknown error');
+        }
+      })
+      .catch(function (e) {
+        var el = document.getElementById('result');
+        el.className = 'bad';
+        el.textContent = 'Not working: ' + e.message;
+      });
+  </script>
+</body>
+</html>
